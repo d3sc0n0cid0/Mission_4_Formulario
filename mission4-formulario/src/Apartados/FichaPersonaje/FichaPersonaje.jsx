@@ -1,11 +1,51 @@
-import { useEffect, useState } from "react";
-import {UsePersonajeUQ} from '../Hooks/UsePersonajeUQ.jsx'
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+
+import {UsePersonajeUQ, useActualizarPersonaje} from '../Hooks/UsePersonajeUQ.jsx'
+
+//zod
+const esquemaRegistro = z.object({
+        nombre: z.string().min(4, "El nombre es demasiado corto"),
+    })
+
 export function FichaPersonaje(){
-
-    const [buscarNombre, setbuscarNombre] = useState(" ");
+    //Variables
+        //UseState
+    const [buscarNombre, setbuscarNombre] = useState("");
     const [personajeSeleccionado, setPersonajeSeleccionado] = useState(null);
+        //Use Querey
+    const usePersonaje = UsePersonajeUQ(buscarNombre); //{ data = [], isPending, isError, error }
+        //Mutate
+    const actualizaPersonaje = useActualizarPersonaje(); //{ mutate, isPending: isUpdating, isSuccess, isError: isUpdateError }    
+        //Use From
+    const {
+        register,        // conecta un input al formulario
+        handleSubmit,    // envuelve nuestro onSubmit
+        reset,
+        formState: { errors, isSubmitting },
+    } = useForm({
+        resolver: zodResolver(esquemaRegistro),
+    });
+    async function handleClick(datos){
+        console.log(datos); //4 render, dos nada mas inicializar la página otros 2 al enviar
+        await new Promise((resolve) => setTimeout(resolve, 1000)); //Para que quede más bonito y se vea que está actualizando
 
-    const { data = [], isPending, isError, error } = UsePersonajeUQ(buscarNombre);
+        console.log(`ID: ${personajeSeleccionado.id}`);
+        console.log("Datos:",datos);
+
+        actualizaPersonaje.mutate(
+            { id: personajeSeleccionado.id, datosActualizados: datos },
+            {onSuccess: (personajeActualizado) => {
+                console.log("Actualizado con éxito");
+                setPersonajeSeleccionado(personajeActualizado);
+            },}
+        );
+    };
+
+
 
     return(
         <>
@@ -19,16 +59,16 @@ export function FichaPersonaje(){
             </label>
 
         {/*Mensajes de cargando/error TO-DO: Ponerlos luego bonitos*/}
-            {isPending && <p>Cargando...</p>}
-            {isError && <p role="alert">Error: {error.message}</p>}
+            {usePersonaje.isPending && <p>Cargando...</p>}
+            {usePersonaje.isError && <p role="alert">Error: {usePersonaje.error.message}</p>}
 
         {/*Lista de los personajes*/}
         <ul>
-            {data.map((personaje) => (
+            {usePersonaje.data?.map((personaje) => (
             <li key={personaje.id}>
                 <button
                 type="button"
-                onClick={() => setPersonajeSeleccionado(personaje)}
+                onClick={() => {setPersonajeSeleccionado(personaje); reset(personaje)}}
                 >
                 {personaje.nombre} - {personaje.talento}
                 </button>
@@ -49,11 +89,24 @@ export function FichaPersonaje(){
                 <p>________________________________________________</p>
             </div>
         )}
-        {personajeSeleccionado &&(
-            <div>
-                <button Ah></button>
-            </div>
-        )}
+        {/*Editar y actualizar datos de un personaje TO-DO: Poner los errores bonitos*/}
+
+            {personajeSeleccionado && (
+                <form onSubmit={handleSubmit(handleClick)}>
+                    <h3>Editar ficha de {personajeSeleccionado.nombre}</h3>
+
+                {/*Nombre personaje*/}
+                    <label>Nombre: <input {...register("nombre")} /></label>
+                    {errors.nombre && <span>{errors.nombre.message}</span>}
+
+
+                    <button type="submit" disabled={actualizaPersonaje.isPending}>
+                        {usePersonaje.isSubmitting ? "Actualizando..." : "Actualizar"}
+                    </button>
+                    {actualizaPersonaje.isSuccess && <p>Personaje actualizado correctamente.</p>}
+                    {actualizaPersonaje.isError && <p role="alert">{actualizaPersonaje.error?.message}</p>}
+                </form>
+            )}
         </>
     )
 }

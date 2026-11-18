@@ -4,16 +4,6 @@ const API_Estados = 'http://localhost:3000/estado';
 const API_Rol = 'http://localhost:3000/rol';
 
 
-export async function DatosPersonaje(){
-    const respuesta = await fetch(API_Personajes);
-
-    if (!respuesta.ok) {
-        throw new Error(`Error HTTP: ${respuesta.status}`);
-    }
-
-    const datos = await respuesta.json(); 
-    return datos;
-}
 export async function BuscarPorNombre(objetoUseQuery) {
     //console.log(objetoUseQuery);
     const nombreBuscado = objetoUseQuery.queryKey[1] || "";
@@ -28,24 +18,17 @@ export async function BuscarPorNombre(objetoUseQuery) {
     return json.filter((p) => p.nombre.includes(nombreBuscado.trim()));
 }
 
-export async function EstadoPersonaje(){
-    const respuesta = await fetch(API_Estados);
+export async function actualizar({id, datosActualizados}) {
 
-    if (!respuesta.ok) {
-        throw new Error(`Error HTTP: ${respuesta.status}`);
-    }
+    console.log("ID:",id);
+    console.log("Datos Actualizados:",datosActualizados);
 
-    const datos = await respuesta.json(); 
-    return datos;
-}
 
-export async function RolPersonaje(){
-    const respuesta = await fetch(API_Rol);
-
-    if (!respuesta.ok) {
-        throw new Error(`Error HTTP: ${respuesta.status}`);
-    }
-
-    const datos = await respuesta.json(); 
-    return datos;
+  const r = await fetch(`${API_Personajes}/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(datosActualizados),
+  });
+  if (!r.ok) throw new Error("Error al actualizar");
+  return r.json();
 }
