@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import {DatosPersonaje, EstadoPersonaje, RolPersonaje, BuscarPorNombre} from '../FichaPersonaje/Api.jsx';
 
 
-export function UsePersonajeUQ({ buscarNombre = "" }){
+export function UsePersonajeUQ( buscarNombre = "" ){
 
     console.log(`BuscarNombre = ${buscarNombre}`)
   //Consigo los datos y los recojo fuera para usarlos
@@ -11,3 +11,4 @@ export function UsePersonajeUQ({ buscarNombre = "" }){
       queryFn: BuscarPorNombre,
   });
 }
+
