@@ -7,7 +7,7 @@
       "altura_cm": 160,
       "peso_kg": 52,
       "cumpleanos": "5 de febrero",
-      "descripcion": "Un estudiante ordinario que fue elegido por sorteo para asistir a la Academia Pico de la Esperanza. Es optimista, amable y suele actuar como la voz de la razón."
+      "descripcion": "Un estudiante ordinario que fue elegido por sorteo para asistir a la Academia Pico de la Esperanza."
     },
     {
       "id": "2",
@@ -16,7 +16,7 @@
       "altura_cm": 167,
       "peso_kg": 48,
       "cumpleanos": "6 de octubre",
-      "descripcion": "Una chica enigmática que no recuerda cuál es su talento definitivo. Es extremadamente calmada, observadora y analítica."
+      "descripcion": "Una chica enigmática, extremadamente calmada, observadora y analítica."
     },
     {
       "id": "3",
@@ -25,7 +25,7 @@
       "altura_cm": 185,
       "peso_kg": 68,
       "cumpleanos": "5 de mayo",
-      "descripcion": "Sucesor de un enorme conglomerado financiero mundial. Arrogante, frío y calculador, se considera superior a los demás estudiantes."
+      "descripcion": "Sucesor de un enorme conglomerado financiero mundial."
     },
     {
       "id": "4",
@@ -33,7 +33,7 @@
       "talento": "Escritora Definitiva",
       "altura_cm": 164,
       "peso_kg": 47,
-      "descripcion": "Autora de novelas románticas superventas. Es extremadamente tímida, pesimista y paranoica, convencida de que todos hablan mal de ella."
+      "descripcion": "Autora de novelas románticas superventas."
     },
     {
       "id": "5",
