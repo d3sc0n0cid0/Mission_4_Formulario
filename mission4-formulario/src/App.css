@@ -1,0 +1,14 @@
+html {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;    
+    overflow-y: auto;
+    background-image: url('./assets/img/background.jpg'); 
+	background-repeat: no-repeat;
+	background-size: cover;
+    background-color: rgb(155, 155, 229);
+    background-position: center;
+    background-attachment: fixed;
+    text-align: center;
+    color: rgb(63, 47, 47);
+}

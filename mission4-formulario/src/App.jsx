@@ -1,6 +1,5 @@
 import './App.css'
 
-
 import {FichaPersonaje} from './Apartados/FichaPersonaje/FichaPersonaje.jsx';
 
 function App() {
