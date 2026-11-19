@@ -9,6 +9,12 @@ import {UsePersonajeUQ, useActualizarPersonaje} from '../Hooks/UsePersonajeUQ.js
 //zod
 const esquemaRegistro = z.object({
         nombre: z.string().min(4, "El nombre es demasiado corto"),
+        altura: z.coerce.number({ invalid_type_error: "Debe ser un número válido"})
+        .positive("La altura debe ser un número positivo").min(1,"Mínimo 1 metro").max(3,"Máximo 3 metros"),
+        peso: z.coerce.number({ invalid_type_error: "Debe ser un número válido"})
+        .positive("El peso debe ser un número positivo").min(30,"Mínimo 30 kg").max(500,"Máximo 500 kilogramos")    ,
+        //bday:,
+        //desc:,
     })
 
 export function FichaPersonaje(){
@@ -31,8 +37,6 @@ export function FichaPersonaje(){
     });
     async function handleClick(datos){
         console.log(datos); //4 render, dos nada mas inicializar la página otros 2 al enviar
-        await new Promise((resolve) => setTimeout(resolve, 1000)); //Para que quede más bonito y se vea que está actualizando
-
         console.log(`ID: ${personajeSeleccionado.id}`);
         console.log("Datos:",datos);
 
@@ -49,15 +53,16 @@ export function FichaPersonaje(){
 
     return(
         <>
+        <div className="buscador">
         {/*Buscador */}
-            <label>Buscador:
-                <input 
+            <label className="buscador">
+                <input className="inputBusqueda"
                     value={buscarNombre} 
                     onChange={(e) => setbuscarNombre(e.target.value)} 
                     placeholder="Introduce el nombre de un personaje ej:'MAKOTO'"
                 />
             </label>
-
+        </div>
         {/*Mensajes de cargando/error TO-DO: Ponerlos luego bonitos*/}
             {usePersonaje.isPending && <p>Cargando...</p>}
             {usePersonaje.isError && <p role="alert">Error: {usePersonaje.error.message}</p>}
@@ -98,6 +103,18 @@ export function FichaPersonaje(){
                 {/*Nombre personaje*/}
                     <label>Nombre: <input {...register("nombre")} /></label>
                     {errors.nombre && <span>{errors.nombre.message}</span>}
+
+                    <label>Altura: <input {...register("altura")} /></label>
+                    {errors.altura && <span>{errors.altura.message}</span>}
+
+                     <label>Peso: <input {...register("peso")} /></label>
+                    {errors.peso && <span>{errors.peso.message}</span>}
+
+                    <label>Cumpleaños: <input {...register("bday")} /></label>
+                    {errors.bday && <span>{errors.bday.message}</span>}
+
+                    <label>Descripción: <input {...register("desc")} /></label>
+                    {errors.desc && <span>{errors.desc.message}</span>}
 
 
                     <button type="submit" disabled={actualizaPersonaje.isPending}>

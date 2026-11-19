@@ -2,12 +2,13 @@
   "personajes": [
     {
       "id": "1",
-      "nombre": "Makoto Naegi",
+      "nombre": "Makoto ",
       "talento": "Estudiante Afortunado Definitivo",
       "altura_cm": 160,
       "peso_kg": 52,
       "cumpleanos": "5 de febrero",
-      "descripcion": "Un estudiante ordinario que fue elegido por sorteo para asistir a la Academia Pico de la Esperanza."
+      "descripcion": "Un estudiante ordinario que fue elegido por sorteo para asistir a la Academia Pico de la Esperanza.",
+      "altura": 3
     },
     {
       "id": "2",
@@ -78,7 +79,9 @@
       "altura_cm": 148,
       "peso_kg": 41,
       "cumpleanos": "14 de marzo",
-      "descripcion": "Un genio de la informática responsable de innovadores programas de inteligencia artificial. Es muy dulce, sensible y se asusta con facilidad."
+      "descripcion": "Un genio de la informática responsable de innovadores programas de inteligencia artificial. Es muy dulce, sensible y se asusta con facilidad.",
+      "altura": 3,
+      "peso": 88
     },
     {
       "id": "10",
@@ -127,7 +130,7 @@
     },
     {
       "id": "15",
-      "nombre": "Junko Enoshima",
+      "nombre": "M Enoshima",
       "talento": "Fashionista Definitiva",
       "altura_cm": 169,
       "peso_kg": 45,
@@ -135,13 +138,29 @@
       "descripcion": "Una famosa modelo de portada que marca las tendencias de moda juvenil en todo el país. Es extrovertida, directa y muy expresiva."
     }
   ],
-    "estado": [
-        { "id": "1", "estado": "vivo" },
-        { "id": "2", "estado": "muerto" }
-    ],
-    "rol":[
-        {"id":"1", "rol": "asesino"},
-        {"id":"2", "rol": "victima"},
-        {"id": "3", "rol": ""}
-    ]
+  "estado": [
+    {
+      "id": "1",
+      "estado": "vivo"
+    },
+    {
+      "id": "2",
+      "estado": "muerto"
+    }
+  ],
+  "rol": [
+    {
+      "id": "1",
+      "rol": "asesino"
+    },
+    {
+      "id": "2",
+      "rol": "victima"
+    },
+    {
+      "id": "3",
+      "rol": ""
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
