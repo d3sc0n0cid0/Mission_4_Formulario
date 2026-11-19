@@ -25,6 +25,25 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 /*________________________________________________________________________*/
+/*Crear personaje*/
+.crearPersonaje{
+  padding: 0;
+}
+.crearPersonaje button{
+  background-color: #f6f3f6;
+  border: 1px solid #ebe5eb;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #374151;
+  cursor: pointer;
+}
+.crearPersonaje button:hover{
+  background-color: #63aaf1;
+  color: #ffffff;
+  border-color: #6563f1;
+}
+/*________________________________________________________________________*/
 
 /* Lista de resultados */
 .contenedor-lista-personajes{

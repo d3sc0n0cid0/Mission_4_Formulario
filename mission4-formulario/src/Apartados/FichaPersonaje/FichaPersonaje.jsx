@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import "./FichaPersonaje.css"; // Importamos el CSS
 
-import {UsePersonajeUQ, useActualizarPersonaje} from '../Hooks/UsePersonajeUQ.jsx'
+import {UsePersonajeUQ, useActualizarPersonaje, useCrearPersonaje} from '../Hooks/UsePersonajeUQ.jsx'
 
 //zod
 const esquemaRegistro = z.object({
@@ -21,12 +21,14 @@ const esquemaRegistro = z.object({
 export function FichaPersonaje(){
     //Variables
         //UseState
+    const [button, setbutton] = useState(null); //Para setear si estamos creando o actualizando (1 crear, 2 selectPersonaje)
     const [buscarNombre, setbuscarNombre] = useState("");
     const [personajeSeleccionado, setPersonajeSeleccionado] = useState(null);
         //Use Querey
     const usePersonaje = UsePersonajeUQ(buscarNombre); //{ data = [], isPending, isError, error }
         //Mutate
-    const actualizaPersonaje = useActualizarPersonaje(); //{ mutate, isPending: isUpdating, isSuccess, isError: isUpdateError }    
+    const actualizaPersonaje = useActualizarPersonaje(); //{ mutate, isPending: isUpdating, isSuccess, isError: isUpdateError }
+    const crearPersonaje = useCrearPersonaje();   
         //Use From
     const {
         register,        // conecta un input al formulario
@@ -36,7 +38,7 @@ export function FichaPersonaje(){
     } = useForm({
         resolver: zodResolver(esquemaRegistro),
     });
-    async function handleClick(datos){
+    async function handleClick_Actualizar(datos){
         console.log(datos); //4 render, dos nada mas inicializar la página otros 2 al enviar
         console.log(`ID: ${personajeSeleccionado.id}`);
         console.log("Datos:",datos);
@@ -51,8 +53,19 @@ export function FichaPersonaje(){
             },}
         );
     };
-
-
+        async function handleClick_Crear(datos){
+        console.log(datos); 
+        
+        crearPersonaje.mutate(
+             datos,
+            {onSuccess: (personajeCreado) => {
+                console.log("Actualizado con éxito");
+                setPersonajeSeleccionado(personajeCreado);
+                //isDirty -> false y el succes -> true
+                reset(datos);
+            },}
+        );
+    };
 
     return(
         <div className="contenedor-ficha">
@@ -65,6 +78,22 @@ export function FichaPersonaje(){
                     placeholder="Introduce el nombre de un personaje ej:'MAKOTO'"
                 />
             </label>
+        </div>
+        {/*Botón de crear nuevo personaje*/}
+        <div className="crearPersonaje">
+            <button type="button"
+                onClick={() => {setbutton(1);
+                setPersonajeSeleccionado(null);
+                crearPersonaje.reset(); // Limpia mensajes de éxito/error anteriores
+                reset({ //Porque si no, se quedan los datos del personaje anterior
+                    nombre: "",
+                    talento: "",
+                    altura_cm: "",
+                    peso_kg: "",
+                    cumpleanos: "",
+                    descripcion: "",
+                });
+            }}>Crear Personaje</button>
         </div>
         {/*Mensajes de cargando/error*/}
             {usePersonaje.isPending && <p className="mensaje-info">Cargando...</p>}
@@ -85,7 +114,9 @@ export function FichaPersonaje(){
                         peso_kg: personaje.peso_kg,
                         cumpleanos: personaje.cumpleanos,
                         descripcion: personaje.descripcion,
-                        });}}
+                        });
+                        setbutton(2);
+                    }}
                     >
                     {personaje.nombre} - {personaje.talento}
                     </button>
@@ -94,7 +125,7 @@ export function FichaPersonaje(){
             </ul>
         </div>
       {/*Datos del personaje seleccionado TO-DO: Poner imagen del personaje*/}
-        {personajeSeleccionado && (
+        {personajeSeleccionado && button===2 && (
             <div className="tarjeta-ficha">
                 <h3>Ficha de {personajeSeleccionado.nombre}</h3>
                 <p>Talento: {personajeSeleccionado.talento}</p>
@@ -105,11 +136,10 @@ export function FichaPersonaje(){
             </div>
         )}
         {/*Editar y actualizar datos de un personaje*/}
-            {personajeSeleccionado && (
-                <form className="formulario-edicion" onSubmit={handleSubmit(handleClick)}>
+            {personajeSeleccionado && button===2 && (
+                <form className="formulario-edicion" onSubmit={handleSubmit(handleClick_Actualizar)}>
                     <h3>Editar ficha de {personajeSeleccionado.nombre}</h3>
 
-                {/*Nombre personaje*/}
                     <label>Nombre: <input {...register("nombre")} /></label>
                     {errors.nombre && <span className="error-campo">{errors.nombre.message}</span>}
 
@@ -135,6 +165,38 @@ export function FichaPersonaje(){
                     {actualizaPersonaje.isSuccess && !isDirty && (<p className="mensaje-exito">Personaje actualizado correctamente.</p>)}
                     {isDirty && (<p className="mensaje-sucio">Los datos no han sido guardados</p>)}
                     {actualizaPersonaje.isError && <p className="mensaje-error" role="alert">{actualizaPersonaje.error?.message}</p>}
+                </form>
+            )}
+        {/*Añadir un nuevo personaje*/}
+            {button===1 && (
+                <form className="formulario-edicion" onSubmit={handleSubmit(handleClick_Crear)}>
+                    <h3>Crea un personaje:</h3>
+
+                    <label>Nombre: <input {...register("nombre")} /></label>
+                    {errors.nombre && <span className="error-campo">{errors.nombre.message}</span>}
+
+                    <label>Talento: <input {...register("talento")} /></label>
+                    {errors.talento && <span className="error-campo">{errors.talento.message}</span>}                
+
+                    <label>Altura: <input {...register("altura_cm")} /></label>
+                    {errors.altura_cm && <span className="error-campo">{errors.altura_cm.message}</span>}
+
+                     <label>Peso: <input {...register("peso_kg")} /></label>
+                    {errors.peso_kg && <span className="error-campo">{errors.peso_kg.message}</span>}
+
+                    <label>Cumpleaños: <input {...register("cumpleanos")} /></label>
+                    {errors.cumpleanos && <span className="error-campo">{errors.cumpleanos.message}</span>}
+
+                    <label>Descripción: <input {...register("descripcion")} /></label>
+                    {errors.descripcion && <span className="error-campo">{errors.descripcion.message}</span>}
+
+
+                    <button type="submit" disabled={crearPersonaje.isPending}>
+                            {crearPersonaje.isPending ? "Creando…" : "Crear usuario"}
+                    </button>
+                    {crearPersonaje.isSuccess && !isDirty && (<p className="mensaje-exito">Personaje creado correctamente.</p>)}
+                    {isDirty && (<p className="mensaje-sucio">Los datos no han sido guardados</p>)}
+                    {crearPersonaje.isError && <p className="mensaje-error" role="alert">{crearPersonaje.error?.message}</p>}
                 </form>
             )}
         </div>
