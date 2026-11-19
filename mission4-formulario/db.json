@@ -8,7 +8,10 @@
       "peso_kg": 52,
       "cumpleanos": "5 de febrero",
       "descripcion": "Un estudiante ordinario que fue elegido por sorteo para asistir a la Academia Pico de la Esperanza.",
-      "altura": 3
+      "altura": 160,
+      "peso": 52,
+      "bday": "5 de febrero",
+      "desc": "sss"
     },
     {
       "id": "2",
@@ -85,19 +88,21 @@
     },
     {
       "id": "10",
-      "nombre": "Mondo Owada",
+      "nombre": "Mondo Owadassss",
       "talento": "Líder de Pandilla Motera Definitivo",
       "altura_cm": 187,
       "peso_kg": 76,
       "cumpleanos": "9 de junio",
       "descripcion": "El temido líder de la banda de motociclistas más grande de Japón. Aunque tiene un temperamento explosivo, sigue un estricto código de honor.",
-      "altura": 1.1,
-      "peso": 76
+      "altura": 187,
+      "peso": 76,
+      "bday": "9 de junio",
+      "desc": "El temido líder de la banda de motociclistas más grande de Japón. Aunque tiene un temperamento explosivo, sigue un estricto código de honor."
     },
     {
       "id": "11",
       "nombre": "Kiyotaka Ishimaru",
-      "talento": "Monitor de Clase Definitivo",
+      "talento": "Brujula moral definitiva",
       "altura_cm": 176,
       "peso_kg": 66,
       "cumpleanos": "31 de agosto",
@@ -128,16 +133,23 @@
       "altura_cm": 192,
       "peso_kg": 99,
       "cumpleanos": "13 de septiembre",
-      "descripcion": "Una luchadora de complexión imponente conocida como la humana más fuerte del mundo. A pesar de su aspecto intimidante, es serena, noble y muy amable."
+      "descripcion": "Una luchadora de complexión imponente conocida como la humana más fuerte del mundo. A pesar de su aspecto intimidante, es serena, noble y muy amable.",
+      "altura": 192,
+      "peso": 99,
+      "desc": ""
     },
     {
       "id": "15",
-      "nombre": "M Enoshima",
+      "nombre": "Junko Enoshima",
       "talento": "Fashionista Definitiva",
       "altura_cm": 169,
       "peso_kg": 45,
       "cumpleanos": "24 de diciembre",
-      "descripcion": "Una famosa modelo de portada que marca las tendencias de moda juvenil en todo el país. Es extrovertida, directa y muy expresiva."
+      "descripcion": "Una famosa modelo de portada que marca las tendencias de moda juvenil en todo el país. Es extrovertida, directa y muy expresiva.",
+      "altura": 200,
+      "peso": 45,
+      "bday": "24 de diciembre",
+      "desc": "Muerta"
     }
   ],
   "estado": [

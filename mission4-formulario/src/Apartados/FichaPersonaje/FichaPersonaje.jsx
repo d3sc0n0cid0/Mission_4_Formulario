@@ -9,12 +9,13 @@ import {UsePersonajeUQ, useActualizarPersonaje} from '../Hooks/UsePersonajeUQ.js
 //zod
 const esquemaRegistro = z.object({
     nombre: z.string().min(4, "El nombre es demasiado corto"),
-    altura: z.coerce.number({ invalid_type_error: "Debe ser un número válido"})
+    talento: z.string().min(3, "El talento no puede estar vacío"),
+    altura_cm: z.coerce.number({ invalid_type_error: "Debe ser un número válido"})
         .positive("La altura debe ser un número positivo").min(100,"Mínimo 100 cm").max(300,"Máximo 300 cm"),
-    peso: z.coerce.number({ invalid_type_error: "Debe ser un número válido"})
-        .positive("El peso debe ser un número positivo").min(30,"Mínimo 30 kg").max(500,"Máximo 500 kilogramos")    ,
-    //bday:,
-    //desc:,
+    peso_kg: z.coerce.number({ invalid_type_error: "Debe ser un número válido"})
+        .positive("El peso debe ser un número positivo").min(30,"Mínimo 30 kg").max(500,"Máximo 500 kilogramos"),
+    cumpleanos: z.string().min(10, "El cumpleaños no puede estar vacío"),
+    descripcion: z.string().min(3, "La descripción debe tener algo"),
 })
 
 export function FichaPersonaje(){
@@ -31,7 +32,7 @@ export function FichaPersonaje(){
         register,        // conecta un input al formulario
         handleSubmit,    // envuelve nuestro onSubmit
         reset,
-        formState: { errors, isSubmitting },
+        formState: { errors, isSubmitting, isDirty, isError },
     } = useForm({
         resolver: zodResolver(esquemaRegistro),
     });
@@ -45,6 +46,8 @@ export function FichaPersonaje(){
             {onSuccess: (personajeActualizado) => {
                 console.log("Actualizado con éxito");
                 setPersonajeSeleccionado(personajeActualizado);
+                //isDirty -> false y el succes -> true
+                reset(datos);
             },}
         );
     };
@@ -63,7 +66,7 @@ export function FichaPersonaje(){
                 />
             </label>
         </div>
-        {/*Mensajes de cargando/error TO-DO: Ponerlos luego bonitos*/}
+        {/*Mensajes de cargando/error*/}
             {usePersonaje.isPending && <p className="mensaje-info">Cargando...</p>}
             {usePersonaje.isError && <p className="mensaje-error" role="alert">Error: {usePersonaje.error.message}</p>}
 
@@ -77,10 +80,11 @@ export function FichaPersonaje(){
                     onClick={() => {setPersonajeSeleccionado(personaje);
                         reset({ //Hace que estén los campos rellenos de default y así no tiene que meter todos los datos aunque solo vaya a editar 1
                         nombre: personaje.nombre,
-                        altura: personaje.altura_cm,
-                        peso: personaje.peso_kg,
-                        bday: personaje.cumpleanos,
-                        desc: personaje.descripcion,
+                        talento: personaje.talento,
+                        altura_cm: personaje.altura_cm,
+                        peso_kg: personaje.peso_kg,
+                        cumpleanos: personaje.cumpleanos,
+                        descripcion: personaje.descripcion,
                         });}}
                     >
                     {personaje.nombre} - {personaje.talento}
@@ -100,8 +104,7 @@ export function FichaPersonaje(){
                 <p>Descripción: {personajeSeleccionado.descripcion}</p>
             </div>
         )}
-        {/*Editar y actualizar datos de un personaje TO-DO: Poner los errores bonitos*/}
-
+        {/*Editar y actualizar datos de un personaje*/}
             {personajeSeleccionado && (
                 <form className="formulario-edicion" onSubmit={handleSubmit(handleClick)}>
                     <h3>Editar ficha de {personajeSeleccionado.nombre}</h3>
@@ -110,23 +113,27 @@ export function FichaPersonaje(){
                     <label>Nombre: <input {...register("nombre")} /></label>
                     {errors.nombre && <span className="error-campo">{errors.nombre.message}</span>}
 
-                    <label>Altura: <input {...register("altura")} /></label>
-                    {errors.altura && <span className="error-campo">{errors.altura.message}</span>}
+                    <label>Talento: <input {...register("talento")} /></label>
+                    {errors.talento && <span className="error-campo">{errors.talento.message}</span>}                
 
-                     <label>Peso: <input {...register("peso")} /></label>
-                    {errors.peso && <span className="error-campo">{errors.peso.message}</span>}
+                    <label>Altura: <input {...register("altura_cm")} /></label>
+                    {errors.altura_cm && <span className="error-campo">{errors.altura_cm.message}</span>}
 
-                    <label>Cumpleaños: <input {...register("bday")} /></label>
-                    {errors.bday && <span className="error-campo">{errors.bday.message}</span>}
+                     <label>Peso: <input {...register("peso_kg")} /></label>
+                    {errors.peso_kg && <span className="error-campo">{errors.peso_kg.message}</span>}
 
-                    <label>Descripción: <input {...register("desc")} /></label>
-                    {errors.desc && <span className="error-campo">{errors.desc.message}</span>}
+                    <label>Cumpleaños: <input {...register("cumpleanos")} /></label>
+                    {errors.cumpleanos && <span className="error-campo">{errors.cumpleanos.message}</span>}
+
+                    <label>Descripción: <input {...register("descripcion")} /></label>
+                    {errors.descripcion && <span className="error-campo">{errors.descripcion.message}</span>}
 
 
                     <button type="submit" disabled={actualizaPersonaje.isPending}>
-                        {usePersonaje.isSubmitting ? "Actualizando..." : "Actualizar"}
+                        {isSubmitting ? "Actualizando..." : "Actualizar"}
                     </button>
-                    {actualizaPersonaje.isSuccess && <p className="mensaje-exito">Personaje actualizado correctamente.</p>}
+                    {actualizaPersonaje.isSuccess && !isDirty && (<p className="mensaje-exito">Personaje actualizado correctamente.</p>)}
+                    {isDirty && (<p className="mensaje-sucio">Los datos no han sido guardados</p>)}
                     {actualizaPersonaje.isError && <p className="mensaje-error" role="alert">{actualizaPersonaje.error?.message}</p>}
                 </form>
             )}
