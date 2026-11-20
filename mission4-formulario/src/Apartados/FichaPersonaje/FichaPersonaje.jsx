@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import "./FichaPersonaje.css"; // Importamos el CSS
 
-import {UsePersonajeUQ, useActualizarPersonaje, useCrearPersonaje} from '../Hooks/UsePersonajeUQ.jsx'
+import {UsePersonajeUQ, useActualizarPersonaje, useCrearPersonaje, useSelectorRol, useSelectEstado, UseListaEstados, UseListaRoles} from '../Hooks/UsePersonajeUQ.jsx'
 
 //zod
 export const esquemaRegistro = z.object({
@@ -16,6 +16,8 @@ export const esquemaRegistro = z.object({
         .positive("El peso debe ser un número positivo").min(30,"Mínimo 30 kg").max(500,"Máximo 500 kilogramos"),
     cumpleanos: z.string().min(5, "El cumpleaños no puede estar vacío"),
     descripcion: z.string().min(3, "La descripción debe tener algo"),
+    estado: z.coerce.number({error:"Debes elegir un estado de tu personaje"}),
+    rol:z.coerce.number({error:"Debes elegir un rol de tu personaje"}),
 })
 
 export function FichaPersonaje(){
@@ -24,8 +26,14 @@ export function FichaPersonaje(){
     const [button, setbutton] = useState(null); //Para setear si estamos creando o actualizando (1 crear, 2 selectPersonaje)
     const [buscarNombre, setbuscarNombre] = useState("");
     const [personajeSeleccionado, setPersonajeSeleccionado] = useState(null);
+    const [rol, setRol] = useState(null);
+    const [estado, setEstado] = useState(null);
         //Use Querey
     const usePersonaje = UsePersonajeUQ(buscarNombre); //{ data = [], isPending, isError, error }
+    const {data: rolPersonaje} = useSelectorRol(rol);
+    const {data: estadoPersonaje} = useSelectEstado(estado);
+    const {data: ListaEstados} = UseListaEstados();
+    const {data: ListaRoles} = UseListaRoles();
         //Mutate
     const actualizaPersonaje = useActualizarPersonaje(); //{ mutate, isPending: isUpdating, isSuccess, isError: isUpdateError }
     const crearPersonaje = useCrearPersonaje();   
@@ -44,6 +52,8 @@ export function FichaPersonaje(){
             { id: personajeSeleccionado.id, datosActualizados: datos },
             {onSuccess: (personajeActualizado) => {
                 setPersonajeSeleccionado(personajeActualizado);
+                setRol(personajeActualizado.rol);
+                setEstado(personajeActualizado.estado);
                 //isDirty -> false y el succes -> true
                 reset(datos);
             },}
@@ -55,6 +65,8 @@ export function FichaPersonaje(){
              datos,
             {onSuccess: (personajeCreado) => {
                 setPersonajeSeleccionado(personajeCreado);
+                setRol(personajeCreado.rol);
+                setEstado(personajeActualizado.estado);
                 //isDirty -> false y el succes -> true
                 reset(datos);
                 reset({ //Para que no se quede con los datos anteriores guardados
@@ -64,6 +76,8 @@ export function FichaPersonaje(){
                         peso_kg: "",
                         cumpleanos: "",
                         descripcion: "",
+                        estado:"",
+                        rol:""
                         });
             },}
         );
@@ -86,6 +100,8 @@ export function FichaPersonaje(){
             <button type="button"
                 onClick={() => {setbutton(1);
                 setPersonajeSeleccionado(null);
+                setRol(null);
+                setEstado(null);
                 crearPersonaje.reset(); // Limpia mensajes de éxito/error anteriores
                 reset({ //Porque si no, se quedan los datos del personaje anterior
                     nombre: "",
@@ -94,6 +110,8 @@ export function FichaPersonaje(){
                     peso_kg: "",
                     cumpleanos: "",
                     descripcion: "",
+                    estado:"",
+                    rol:""
                 });
             }}>Crear Personaje</button>
         </div>
@@ -116,8 +134,12 @@ export function FichaPersonaje(){
                         peso_kg: personaje.peso_kg,
                         cumpleanos: personaje.cumpleanos,
                         descripcion: personaje.descripcion,
+                        estado: personaje.estado,
+                        rol: personaje.rol,
                         });
                         setbutton(2);
+                        setRol(personaje.rol);
+                        setEstado(personaje.estado);
                     }}
                     >
                     {personaje.nombre} - {personaje.talento}
@@ -135,6 +157,8 @@ export function FichaPersonaje(){
                 <p>Peso: {personajeSeleccionado.peso_kg} kg</p>
                 <p>Cumpleaños: {personajeSeleccionado.cumpleanos}</p>
                 <p>Descripción: {personajeSeleccionado.descripcion}</p>
+                <p>Estado: {estadoPersonaje?.estado}</p>
+                <p>Rol: {rolPersonaje?.rol}</p>
             </div>
         )}
         {/*Editar y actualizar datos de un personaje*/}
@@ -166,11 +190,28 @@ export function FichaPersonaje(){
                         {errors.descripcion && <span className="error-campo" role="alert">{errors.descripcion.message}</span>}
                     </label>
 
+                    <div className="radioButtons">
+                        {ListaEstados?.map((estados) =>(
+                            <label key={estados.id}>
+                                <input type="radio" value={estados.id} {...register("estado")} />
+                                {estados.estado}
+                            </label>
+                        ))}
+                    </div>
+                    <div className="radioButtons">
+                        {ListaRoles?.map((roles) =>(
+                            <label key={roles.id}>
+                                <input type="radio" value={roles.id} {...register("rol")} />
+                                {roles.rol}
+                            </label>
+                        ))}
+                    </div>
+
 
                     <button type="submit" disabled={actualizaPersonaje.isPending}>
                         {isSubmitting ? "Actualizando..." : "Actualizar"}
                     </button>
-                    {actualizaPersonaje.isPending && !isDirty && (<p className="mensaje-exito" role="alert">Personaje actualizado correctamente.</p>)}
+                    {actualizaPersonaje.isSuccess && !isDirty && (<p className="mensaje-exito" role="alert">Personaje actualizado correctamente.</p>)}
                     {isDirty && (<p className="mensaje-sucio" role="alert">Los datos no han sido guardados</p>)}
                     {actualizaPersonaje.isError && <p className="mensaje-error" role="alert">{actualizaPersonaje.error?.message}</p>}
                 </form>
@@ -204,6 +245,22 @@ export function FichaPersonaje(){
                         {errors.descripcion && <span className="error-campo" role="alert">{errors.descripcion.message}</span>}
                     </label>
 
+                    <div className="radioButtons">
+                        {ListaEstados?.map((estados) =>(
+                            <label key={estados.id}>
+                                <input type="radio" value={estados.id} {...register("estado")} />
+                                {estados.estado}
+                            </label>
+                        ))}
+                    </div>
+                    <div className="radioButtons">
+                        {ListaRoles?.map((roles) =>(
+                            <label key={roles.id}>
+                                <input type="radio" value={roles.id} {...register("rol")} />
+                                {roles.rol}
+                            </label>
+                        ))}
+                    </div>
 
                     <button type="submit" disabled={crearPersonaje.isPending}>
                             {crearPersonaje.isPending ? "Creando…" : "Crear usuario"}

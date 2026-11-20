@@ -1,171 +1,203 @@
 {
   "personajes": [
     {
-      "id": "1",
+      "id": "0",
       "nombre": "Makoto ",
       "talento": "Estudiante Afortunado Definitivo",
       "altura_cm": 160,
       "peso_kg": 52,
       "cumpleanos": "5 de febrero",
-      "descripcion": "Un estudiante ordinario que fue elegido por sorteo para asistir a la Academia Pico de la Esperanza."
+      "descripcion": "Un estudiante ordinario que fue elegido por sorteo para asistir a la Academia Pico de la Esperanza.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "2",
+      "id": "1",
       "nombre": "Kyoko Kirigiri",
       "talento": "???",
       "altura_cm": 167,
       "peso_kg": 48,
       "cumpleanos": "6 de octubre",
-      "descripcion": "Una chica enigmática, extremadamente calmada, observadora y analítica."
+      "descripcion": "Una chica enigmática, extremadamente calmada, observadora y analítica.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "3",
+      "id": "2",
       "nombre": "Byakuya Togami",
       "talento": "Heredero Definitivo",
       "altura_cm": 185,
       "peso_kg": 68,
       "cumpleanos": "5 de mayo",
-      "descripcion": "Sucesor de un enorme conglomerado financiero mundial."
+      "descripcion": "Sucesor de un enorme conglomerado financiero mundial.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "4",
+      "id": "3",
       "nombre": "Toko Fukawa",
       "talento": "Escritora Definitiva",
       "altura_cm": 164,
       "peso_kg": 47,
-      "descripcion": "Autora de novelas románticas superventas."
+      "descripcion": "Autora de novelas románticas superventas.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "5",
+      "id": "4",
       "nombre": "Aoi Asahina",
       "talento": "Nadadora Definitiva",
       "altura_cm": 160,
       "peso_kg": 50,
       "cumpleanos": "24 de abril",
-      "descripcion": "Una atleta enérgica, entusiasta y de buen corazón que se preocupa mucho por sus amigos y tiene una obsesión por los donuts."
+      "descripcion": "Una atleta enérgica, entusiasta y de buen corazón que se preocupa mucho por sus amigos y tiene una obsesión por los donuts.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "6",
+      "id": "5",
       "nombre": "Yasuhiro Hagakure",
       "talento": "Clarividente Definitivo",
       "altura_cm": 176,
       "peso_kg": 71,
       "cumpleanos": "25 de julio",
-      "descripcion": "Un joven relajado y algo supersticioso que asegura que sus predicciones aciertan al menos un 30% de las veces. Es el mayor del grupo por haber repetido curso."
+      "descripcion": "Un joven relajado y algo supersticioso que asegura que sus predicciones aciertan al menos un 30% de las veces. Es el mayor del grupo por haber repetido curso.",
+      "estado": 2,
+      "rol": 2
     },
     {
-      "id": "7",
+      "id": "6",
       "nombre": "Sayaka Maizono",
       "talento": "Idol Definitiva",
       "altura_cm": 165,
       "peso_kg": 49,
       "cumpleanos": "7 de julio",
-      "descripcion": "Líder de un famoso grupo de pop nacional. Es alegre, atenta y fue a la misma escuela secundaria que Makoto."
+      "descripcion": "Líder de un famoso grupo de pop nacional. Es alegre, atenta y fue a la misma escuela secundaria que Makoto.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "8",
+      "id": "7",
       "nombre": "Leon Kuwata",
       "talento": "Jugador de Béisbol Definitivo",
       "altura_cm": 175,
       "peso_kg": 67,
       "cumpleanos": "3 de enero",
-      "descripcion": "A pesar de ser un prodigio natural en el béisbol, odia practicarlo y sueña con dejar el deporte para convertirse en estrella del rock."
+      "descripcion": "A pesar de ser un prodigio natural en el béisbol, odia practicarlo y sueña con dejar el deporte para convertirse en estrella del rock.",
+      "estado": 0,
+      "rol": 1
     },
     {
-      "id": "9",
+      "id": "8",
       "nombre": "Chihiro Fujisaki",
       "talento": "Programador/a Definitivo/a",
       "altura_cm": 148,
       "peso_kg": 41,
       "cumpleanos": "14 de marzo",
-      "descripcion": "Un genio de la informática responsable de innovadores programas de inteligencia artificial. Es muy dulce, sensible y se asusta con facilidad."
+      "descripcion": "Un genio de la informática responsable de innovadores programas de inteligencia artificial. Es muy dulce, sensible y se asusta con facilidad.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "10",
+      "id": "9",
       "nombre": "Mondo Owadassss",
       "talento": "Líder de Pandilla Motera Definitivo",
       "altura_cm": 187,
       "peso_kg": 76,
       "cumpleanos": "9 de junio",
-      "descripcion": "El temido líder de la banda de motociclistas más grande de Japón. Aunque tiene un temperamento explosivo, sigue un estricto código de honor."
+      "descripcion": "El temido líder de la banda de motociclistas más grande de Japón. Aunque tiene un temperamento explosivo, sigue un estricto código de honor.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "11",
+      "id": "10",
       "nombre": "Kiyotaka Ishimaru",
       "talento": "Brujula moral definitiva",
       "altura_cm": 176,
       "peso_kg": 66,
       "cumpleanos": "31 de agosto",
-      "descripcion": "Un estudiante apasionado por la disciplina, la puntualidad y el esfuerzo constante. Habla siempre en voz alta y con mucha formalidad."
+      "descripcion": "Un estudiante apasionado por la disciplina, la puntualidad y el esfuerzo constante. Habla siempre en voz alta y con mucha formalidad.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "12",
+      "id": "11",
       "nombre": "Hifumi Yamada",
       "talento": "Creador de Doujinshi Definitivo",
       "altura_cm": 170,
       "peso_kg": 155,
       "cumpleanos": "31 de diciembre",
-      "descripcion": "Un artista otaku capaz de vender miles de copias de sus cómics independientes. Tiene una imaginación desbordante y suele citar referencias de anime."
+      "descripcion": "Un artista otaku capaz de vender miles de copias de sus cómics independientes. Tiene una imaginación desbordante y suele citar referencias de anime.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "13",
+      "id": "12",
       "nombre": "Celestia Ludenberg",
       "talento": "Apostadora Definitiva",
       "altura_cm": 164,
       "peso_kg": 46,
       "cumpleanos": "23 de noviembre",
-      "descripcion": "Conocida como la Reina de los Mentirosos por no haber perdido nunca una partida de apuestas. Viste con estilo Gothic Lolita y mantiene siempre una compostura elegante."
+      "descripcion": "Conocida como la Reina de los Mentirosos por no haber perdido nunca una partida de apuestas. Viste con estilo Gothic Lolita y mantiene siempre una compostura elegante.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "14",
+      "id": "13",
       "nombre": "Sakura Ogami",
       "talento": "Artista Marcial Definitiva",
       "altura_cm": 192,
       "peso_kg": 99,
       "cumpleanos": "13 de septiembre",
-      "descripcion": "Una luchadora de complexión imponente conocida como la humana más fuerte del mundo. A pesar de su aspecto intimidante, es serena, noble y muy amable."
+      "descripcion": "Una luchadora de complexión imponente conocida como la humana más fuerte del mundo. A pesar de su aspecto intimidante, es serena, noble y muy amable.",
+      "estado": "0",
+      "rol": "2"
     },
     {
-      "id": "15",
+      "id": "14",
       "nombre": "Junko Enoshima",
       "talento": "Fashionista Definitiva",
       "altura_cm": 169,
       "peso_kg": 45,
       "cumpleanos": "24 de diciembre",
-      "descripcion": "Una famosa modelo de portada que marca las tendencias de moda juvenil en todo el país. Es extrovertida, directa y muy expresiva."
+      "descripcion": "Una famosa modelo de portada que marca las tendencias de moda juvenil en todo el país. Es extrovertida, directa y muy expresiva.",
+      "estado": 1,
+      "rol": 2
     },
     {
-      "id": "i9DzNWSb2Ak",
-      "nombre": "Makoto ",
-      "talento": "Programador/a Definitivo/a",
-      "altura_cm": 148,
-      "peso_kg": 100,
-      "cumpleanos": "5 de mayo",
-      "descripcion": "Una descripción"
+      "id": "3aSxf99JgzU",
+      "nombre": "Manolo",
+      "talento": "Hace empanadas",
+      "altura_cm": 100,
+      "peso_kg": 111,
+      "cumpleanos": "111111",
+      "descripcion": "AAAAAA",
+      "estado": 0,
+      "rol": 2
     }
   ],
   "estado": [
     {
-      "id": "1",
+      "id": "0",
       "estado": "vivo"
     },
     {
-      "id": "2",
+      "id": "1",
       "estado": "muerto"
     }
   ],
   "rol": [
     {
-      "id": "1",
+      "id": "0",
       "rol": "asesino"
     },
     {
-      "id": "2",
+      "id": "1",
       "rol": "victima"
     },
     {
-      "id": "3",
-      "rol": ""
+      "id": "2",
+      "rol": "N/A"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

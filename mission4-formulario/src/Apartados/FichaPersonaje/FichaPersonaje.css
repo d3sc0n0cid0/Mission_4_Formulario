@@ -76,6 +76,14 @@
   border-color: #f163e0;
 }
 
+.radioButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
 /*________________________________________________________________________*/
 /* Tarjeta de visualización y Formulario */
 .tarjeta-ficha,

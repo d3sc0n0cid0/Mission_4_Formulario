@@ -20,6 +20,18 @@ export async function BuscarPorNombre(objetoUseQuery) {
   return esquemaListaPersonajes.parse(listaPersonajes); // valida y tipa la respuesta
 
 }
+//Para que me devuelva la lista de estados
+export async function ListaEstados() {
+  const r = await fetch(`${API_Estados}`);
+      if (!r.ok) throw new Error("Error al cargar estados");
+      return r.json();
+}
+//Para que me devuelva la lista de rol
+export async function ListaRoles() {
+  const r = await fetch(`${API_Rol}`);
+      if (!r.ok) throw new Error("Error al cargar roles");
+      return r.json();
+}
 
 //Actualizar un personaje existente
 export async function actualizar({id, datosActualizados}) {
@@ -52,4 +64,30 @@ export async function crear(datosNuevoPersonaje) {
 
   if (!r.ok) throw new Error(`Error al crear: ${r.status}`);
   return r.json();
+}
+
+
+//Para sacar lo de rol
+export async function selectRol(objetoUseQuery) {
+  const rol_num = objetoUseQuery.queryKey[1];
+
+  const r = await fetch(`${API_Rol}`);
+  if (!r.ok) throw new Error(`Error al obtener el rol: ${r.status}`);
+  const rol = await r.json();
+
+  return rol[rol_num] ?? null; // Nunca devuelve undefined
+}
+
+//Para sacar lo de estado
+export async function selectEstado(objetoUseQuery){
+  const estado_num = objetoUseQuery.queryKey[1];
+
+  const r = await fetch(`${API_Estados}`); 
+  if (!r.ok) throw new Error(`Error al obtener el estado: ${r.status}`);
+  const estado = await r.json();
+
+  
+  console.log(estado[estado_num]);
+
+  return estado[estado_num] ?? null;
 }
