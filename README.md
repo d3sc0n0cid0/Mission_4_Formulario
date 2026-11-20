@@ -2,21 +2,20 @@
 
 He creado yo la API con npx json-server db.json
 
+## Descripción
+    Se trata de una página web que muetra a los personajesdel primer juego de danganrompa, puedes editar sus campos además de añadir personajes
+
+## Uso de IA
+He usado la IA de gemini
+
+1. 
+
+2.
 
 
-CRUD -> API 
-db.json -> con las propiedades que nosotros queramos
-    -Peronajes
-    -Juegos
-    -> Hacer un guess character de danganrompa
-    -> Crear una app para guardar que datos de personajes tenemos
+## Autopsia
+Las 2 decisiones más discutibles de tu código y qué alternativa descartaste en cada una.
 
+1. 
 
-    (vivo, muerto, asesino asesinado)
-    -Personaje (datosPersonaje)
-    -Estado (vivo/muerto)
-    -Causa (Asesinado, Asesino, N/A)
-
-    CRUD (Create, read, upate, delete)
-    fetch (url, (POST/DELETE/PUT/PATCH))
-     Y que tenga filtros
+2.
