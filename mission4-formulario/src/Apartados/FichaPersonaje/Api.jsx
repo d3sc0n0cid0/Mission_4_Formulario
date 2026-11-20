@@ -44,6 +44,7 @@ export async function crear(datosNuevoPersonaje) {
 
   //Sumamos 1 para este nuevo
   const nuevoId = String(lista.length + 1);
+  //TO-DO: Hacer un reduce que te devuelva el máximo
 
   //Se incluye en la lista
   const r = await fetch(`${API_Personajes}`, {

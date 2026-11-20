@@ -8,10 +8,6 @@
       "peso_kg": 52,
       "cumpleanos": "5 de febrero",
       "descripcion": "Un estudiante ordinario que fue elegido por sorteo para asistir a la Academia Pico de la Esperanza.",
-      "altura": 160,
-      "peso": 52,
-      "bday": "5 de febrero",
-      "desc": "sss"
     },
     {
       "id": "2",
@@ -83,8 +79,6 @@
       "peso_kg": 41,
       "cumpleanos": "14 de marzo",
       "descripcion": "Un genio de la informática responsable de innovadores programas de inteligencia artificial. Es muy dulce, sensible y se asusta con facilidad.",
-      "altura": 3,
-      "peso": 88
     },
     {
       "id": "10",
@@ -94,11 +88,7 @@
       "peso_kg": 76,
       "cumpleanos": "9 de junio",
       "descripcion": "El temido líder de la banda de motociclistas más grande de Japón. Aunque tiene un temperamento explosivo, sigue un estricto código de honor.",
-      "altura": 187,
-      "peso": 76,
-      "bday": "9 de junio",
-      "desc": "El temido líder de la banda de motociclistas más grande de Japón. Aunque tiene un temperamento explosivo, sigue un estricto código de honor."
-    },
+      },
     {
       "id": "11",
       "nombre": "Kiyotaka Ishimaru",
@@ -134,9 +124,6 @@
       "peso_kg": 99,
       "cumpleanos": "13 de septiembre",
       "descripcion": "Una luchadora de complexión imponente conocida como la humana más fuerte del mundo. A pesar de su aspecto intimidante, es serena, noble y muy amable.",
-      "altura": 192,
-      "peso": 99,
-      "desc": ""
     },
     {
       "id": "15",
@@ -146,19 +133,15 @@
       "peso_kg": 45,
       "cumpleanos": "24 de diciembre",
       "descripcion": "Una famosa modelo de portada que marca las tendencias de moda juvenil en todo el país. Es extrovertida, directa y muy expresiva.",
-      "altura": 200,
-      "peso": 45,
-      "bday": "24 de diciembre",
-      "desc": "Muerta"
     },
     {
       "id": "7v1JmCC2Or4",
-      "nombre": "sqqq",
-      "talento": "11qw",
-      "altura_cm": 122,
-      "peso_kg": 222,
-      "cumpleanos": "aaaaaaaaeeeeeeeeeeeeeeee",
-      "descripcion": "22222"
+      "nombre": "Personaje Creado",
+      "talento": "Es un personaje que he creado",
+      "altura_cm": 100,
+      "peso_kg": 100,
+      "cumpleanos": "19/11/2026",
+      "descripcion": "Una descripción"
     }
   ],
   "estado": [
