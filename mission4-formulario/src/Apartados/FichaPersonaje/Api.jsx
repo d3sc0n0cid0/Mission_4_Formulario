@@ -14,7 +14,7 @@ export async function BuscarPorNombre(objetoUseQuery) {
     //Si ni se escribe nada se muestran todos
     if (!nombreBuscado.trim()) return json;
     //Si se pone algo se busca con ese algo
-    return json.filter((p) => p.nombre.includes(nombreBuscado.trim()));
+    return json.filter((p) =>  p.nombre.toLowerCase().includes(nombreBuscado.trim().toLowerCase()));
 }
 
 //Actualizar un personaje existente

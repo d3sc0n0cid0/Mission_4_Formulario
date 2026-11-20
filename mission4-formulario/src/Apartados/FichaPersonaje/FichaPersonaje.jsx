@@ -10,11 +10,11 @@ import {UsePersonajeUQ, useActualizarPersonaje, useCrearPersonaje} from '../Hook
 const esquemaRegistro = z.object({
     nombre: z.string().min(4, "El nombre es demasiado corto"),
     talento: z.string().min(3, "El talento no puede estar vacío"),
-    altura_cm: z.coerce.number({ invalid_type_error: "Debe ser un número válido"})
+    altura_cm: z.coerce.number({error: "Debe ser un número válido"})
         .positive("La altura debe ser un número positivo").min(100,"Mínimo 100 cm").max(300,"Máximo 300 cm"),
-    peso_kg: z.coerce.number({ invalid_type_error: "Debe ser un número válido"})
+    peso_kg: z.coerce.number({ error: "Debe ser un número válido"})
         .positive("El peso debe ser un número positivo").min(30,"Mínimo 30 kg").max(500,"Máximo 500 kilogramos"),
-    cumpleanos: z.string().min(10, "El cumpleaños no puede estar vacío"),
+    cumpleanos: z.string().min(5, "El cumpleaños no puede estar vacío"),
     descripcion: z.string().min(3, "La descripción debe tener algo"),
 })
 
@@ -140,30 +140,36 @@ export function FichaPersonaje(){
                 <form className="formulario-edicion" onSubmit={handleSubmit(handleClick_Actualizar)}>
                     <h3>Editar ficha de {personajeSeleccionado.nombre}</h3>
 
-                    <label>Nombre: <input {...register("nombre")} /></label>
-                    {errors.nombre && <span className="error-campo">{errors.nombre.message}</span>}
+                    <label>Nombre: <input {...register("nombre")} />
+                        {errors.nombre && <span className="error-campo" role="alert">{errors.nombre.message}</span>}
+                    </label>
 
-                    <label>Talento: <input {...register("talento")} /></label>
-                    {errors.talento && <span className="error-campo">{errors.talento.message}</span>}                
+                    <label>Talento: <input {...register("talento")} />
+                        {errors.talento && <span className="error-campo" role="alert">{errors.talento.message}</span>}                
+                    </label>
 
-                    <label>Altura: <input {...register("altura_cm")} /></label>
-                    {errors.altura_cm && <span className="error-campo">{errors.altura_cm.message}</span>}
+                    <label>Altura: <input type="number" {...register("altura_cm")} />
+                        {errors.altura_cm && <span className="error-campo" role="alert">{errors.altura_cm.message}</span>}
+                    </label>
 
-                     <label>Peso: <input {...register("peso_kg")} /></label>
-                    {errors.peso_kg && <span className="error-campo">{errors.peso_kg.message}</span>}
+                     <label>Peso: <input type="number" {...register("peso_kg")} />
+                        {errors.peso_kg && <span className="error-campo" role="alert">{errors.peso_kg.message}</span>}
+                     </label>
 
-                    <label>Cumpleaños: <input {...register("cumpleanos")} /></label>
-                    {errors.cumpleanos && <span className="error-campo">{errors.cumpleanos.message}</span>}
+                    <label>Cumpleaños: <input {...register("cumpleanos")} />
+                        {errors.cumpleanos && <span className="error-campo" role="alert">{errors.cumpleanos.message}</span>}
+                    </label>
 
-                    <label>Descripción: <input {...register("descripcion")} /></label>
-                    {errors.descripcion && <span className="error-campo">{errors.descripcion.message}</span>}
+                    <label>Descripción: <input {...register("descripcion")} />
+                        {errors.descripcion && <span className="error-campo" role="alert">{errors.descripcion.message}</span>}
+                    </label>
 
 
                     <button type="submit" disabled={actualizaPersonaje.isPending}>
                         {isSubmitting ? "Actualizando..." : "Actualizar"}
                     </button>
-                    {actualizaPersonaje.isSuccess && !isDirty && (<p className="mensaje-exito">Personaje actualizado correctamente.</p>)}
-                    {isDirty && (<p className="mensaje-sucio">Los datos no han sido guardados</p>)}
+                    {actualizaPersonaje.isPending && !isDirty && (<p className="mensaje-exito" role="alert">Personaje actualizado correctamente.</p>)}
+                    {isDirty && (<p className="mensaje-sucio" role="alert">Los datos no han sido guardados</p>)}
                     {actualizaPersonaje.isError && <p className="mensaje-error" role="alert">{actualizaPersonaje.error?.message}</p>}
                 </form>
             )}
@@ -172,30 +178,36 @@ export function FichaPersonaje(){
                 <form className="formulario-edicion" onSubmit={handleSubmit(handleClick_Crear)}>
                     <h3>Crea un personaje:</h3>
 
-                    <label>Nombre: <input {...register("nombre")} /></label>
-                    {errors.nombre && <span className="error-campo">{errors.nombre.message}</span>}
+                    <label>Nombre: <input {...register("nombre")} />
+                        {errors.nombre && <span className="error-campo" role="alert">{errors.nombre.message}</span>}
+                    </label>
 
-                    <label>Talento: <input {...register("talento")} /></label>
-                    {errors.talento && <span className="error-campo">{errors.talento.message}</span>}                
+                    <label>Talento: <input {...register("talento")} />
+                    </label>
+                        {errors.talento && <span className="error-campo" role="alert">{errors.talento.message}</span>}                
 
-                    <label>Altura: <input {...register("altura_cm")} /></label>
-                    {errors.altura_cm && <span className="error-campo">{errors.altura_cm.message}</span>}
+                    <label>Altura: <input type="number" {...register("altura_cm")} />
+                        {errors.altura_cm && <span className="error-campo" role="alert">{errors.altura_cm.message}</span>}
+                    </label>
 
-                     <label>Peso: <input {...register("peso_kg")} /></label>
-                    {errors.peso_kg && <span className="error-campo">{errors.peso_kg.message}</span>}
+                     <label>Peso: <input type="number" {...register("peso_kg")} />
+                        {errors.peso_kg && <span className="error-campo" role="alert">{errors.peso_kg.message}</span>}
+                     </label>
 
-                    <label>Cumpleaños: <input {...register("cumpleanos")} /></label>
-                    {errors.cumpleanos && <span className="error-campo">{errors.cumpleanos.message}</span>}
+                    <label>Cumpleaños: <input {...register("cumpleanos")} />
+                        {errors.cumpleanos && <span className="error-campo" role="alert">{errors.cumpleanos.message}</span>}
+                    </label>
 
-                    <label>Descripción: <input {...register("descripcion")} /></label>
-                    {errors.descripcion && <span className="error-campo">{errors.descripcion.message}</span>}
+                    <label>Descripción: <input {...register("descripcion")} />
+                        {errors.descripcion && <span className="error-campo" role="alert">{errors.descripcion.message}</span>}
+                    </label>
 
 
                     <button type="submit" disabled={crearPersonaje.isPending}>
                             {crearPersonaje.isPending ? "Creando…" : "Crear usuario"}
                     </button>
-                    {crearPersonaje.isSuccess && !isDirty && (<p className="mensaje-exito">Personaje creado correctamente.</p>)}
-                    {isDirty && (<p className="mensaje-sucio">Los datos no han sido guardados</p>)}
+                    {crearPersonaje.isSuccess && !isDirty && (<p className="mensaje-exito" role="alert">Personaje creado correctamente.</p>)}
+                    {isDirty && (<p className="mensaje-sucio" role="alert">Los datos no han sido guardados</p>)}
                     {crearPersonaje.isError && <p className="mensaje-error" role="alert">{crearPersonaje.error?.message}</p>}
                 </form>
             )}
