@@ -7,7 +7,7 @@ import "./FichaPersonaje.css"; // Importamos el CSS
 import {UsePersonajeUQ, useActualizarPersonaje, useCrearPersonaje} from '../Hooks/UsePersonajeUQ.jsx'
 
 //zod
-const esquemaRegistro = z.object({
+export const esquemaRegistro = z.object({
     nombre: z.string().min(4, "El nombre es demasiado corto"),
     talento: z.string().min(3, "El talento no puede estar vacío"),
     altura_cm: z.coerce.number({error: "Debe ser un número válido"})
@@ -39,30 +39,32 @@ export function FichaPersonaje(){
         resolver: zodResolver(esquemaRegistro),
     });
     async function handleClick_Actualizar(datos){
-        console.log(datos); //4 render, dos nada mas inicializar la página otros 2 al enviar
-        console.log(`ID: ${personajeSeleccionado.id}`);
-        console.log("Datos:",datos);
 
         actualizaPersonaje.mutate(
             { id: personajeSeleccionado.id, datosActualizados: datos },
             {onSuccess: (personajeActualizado) => {
-                console.log("Actualizado con éxito");
                 setPersonajeSeleccionado(personajeActualizado);
                 //isDirty -> false y el succes -> true
                 reset(datos);
             },}
         );
     };
-        async function handleClick_Crear(datos){
-        console.log(datos); 
+    async function handleClick_Crear(datos){
         
         crearPersonaje.mutate(
              datos,
             {onSuccess: (personajeCreado) => {
-                console.log("Actualizado con éxito");
                 setPersonajeSeleccionado(personajeCreado);
                 //isDirty -> false y el succes -> true
                 reset(datos);
+                reset({ //Para que no se quede con los datos anteriores guardados
+                        nombre: "",
+                        talento: "",
+                        altura_cm: "",
+                        peso_kg: "",
+                        cumpleanos: "",
+                        descripcion: "",
+                        });
             },}
         );
     };
