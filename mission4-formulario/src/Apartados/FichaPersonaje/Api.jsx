@@ -60,7 +60,6 @@ export async function crear(datosNuevoPersonaje) {
     }
   });
   const nuevoId = String(idMax + 1);
-  console.log(nuevoId);
   
   //Se incluye en la lista
   const r = await fetch(`${API_Personajes}`, {
@@ -92,9 +91,6 @@ export async function selectEstado(objetoUseQuery){
   const r = await fetch(`${API_Estados}`); 
   if (!r.ok) throw new Error(`Error al obtener el estado: ${r.status}`);
   const estado = await r.json();
-
-  
-  console.log(estado[estado_num]);
 
   return estado[estado_num] ?? null;
 }

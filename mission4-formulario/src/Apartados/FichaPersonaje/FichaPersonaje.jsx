@@ -152,7 +152,7 @@ export function FichaPersonaje(){
                 </ul>
             </div>
         )}
-      {/*Datos del personaje seleccionado TO-DO: Poner imagen del personaje*/}
+      {/*Datos del personaje seleccionado*/}
         {personajeSeleccionado && button===2 && (
             <div className="tarjeta-ficha">
                 <h3>Ficha de {personajeSeleccionado.nombre}</h3>
