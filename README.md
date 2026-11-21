@@ -20,4 +20,6 @@ Las 2 decisiones más discutibles de tu código y qué alternativa descartaste e
 
 1. Estaba pensando originalmente, que aparte de hacer el trabajo base, añadir un minijuego de adivna el personaje, donde apartir de tu poner nombres te ponía si tenía el mismo estado, nombre, altura etc. del personaje. Pero no era relevante para la nota así que lo acabé descartando.
 
-2.
+2. Quería que los id fueran en orden, pero por alguna razón da igual lo que hiciera 
+    JSON.stringify({ id: String(nuevoId), ...datosNuevoPersonaje }),
+    me daba siempre un id aleatorío al que no podía encontrarle lógica, así que los ids creados son aleatorios, en ciarta forma los hacen más seguros

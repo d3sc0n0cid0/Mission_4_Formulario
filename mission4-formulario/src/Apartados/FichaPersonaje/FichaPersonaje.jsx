@@ -66,7 +66,7 @@ export function FichaPersonaje(){
             {onSuccess: (personajeCreado) => {
                 setPersonajeSeleccionado(personajeCreado);
                 setRol(personajeCreado.rol);
-                setEstado(personajeActualizado.estado);
+                setEstado(personajeCreado.estado);
                 //isDirty -> false y el succes -> true
                 reset(datos);
                 reset({ //Para que no se quede con los datos anteriores guardados
@@ -120,34 +120,38 @@ export function FichaPersonaje(){
             {usePersonaje.isError && <p className="mensaje-error" role="alert">Error: {usePersonaje.error.message}</p>}
 
         {/*Lista de los personajes*/}
-        <div className="contenedor-lista-personajes">
-            <ul className="lista-personajes">
-                {usePersonaje.data?.map((personaje) => (
-                <li key={personaje.id}>
-                    <button
-                    type="button"
-                    onClick={() => {setPersonajeSeleccionado(personaje);
-                        reset({ //Hace que estén los campos rellenos de default y así no tiene que meter todos los datos aunque solo vaya a editar 1
-                        nombre: personaje.nombre,
-                        talento: personaje.talento,
-                        altura_cm: personaje.altura_cm,
-                        peso_kg: personaje.peso_kg,
-                        cumpleanos: personaje.cumpleanos,
-                        descripcion: personaje.descripcion,
-                        estado: personaje.estado,
-                        rol: personaje.rol,
-                        });
-                        setbutton(2);
-                        setRol(personaje.rol);
-                        setEstado(personaje.estado);
-                    }}
-                    >
-                    {personaje.nombre} - {personaje.talento}
-                    </button>
-                </li>
-                ))}
-            </ul>
-        </div>
+        {usePersonaje.data?.length === 0 ? (
+            <p>No hay elementos para mostrar.</p>
+        ) : (
+            <div className="contenedor-lista-personajes">
+                <ul className="lista-personajes">
+                    {usePersonaje.data?.map((personaje) => (
+                    <li key={personaje.id}>
+                        <button
+                        type="button"
+                        onClick={() => {setPersonajeSeleccionado(personaje);
+                            reset({ //Hace que estén los campos rellenos de default y así no tiene que meter todos los datos aunque solo vaya a editar 1
+                            nombre: personaje.nombre,
+                            talento: personaje.talento,
+                            altura_cm: personaje.altura_cm,
+                            peso_kg: personaje.peso_kg,
+                            cumpleanos: personaje.cumpleanos,
+                            descripcion: personaje.descripcion,
+                            estado: personaje.estado,
+                            rol: personaje.rol,
+                            });
+                            setbutton(2);
+                            setRol(personaje.rol);
+                            setEstado(personaje.estado);
+                        }}
+                        >
+                        {personaje.nombre} - {personaje.talento}
+                        </button>
+                    </li>
+                    ))}
+                </ul>
+            </div>
+        )}
       {/*Datos del personaje seleccionado TO-DO: Poner imagen del personaje*/}
         {personajeSeleccionado && button===2 && (
             <div className="tarjeta-ficha">

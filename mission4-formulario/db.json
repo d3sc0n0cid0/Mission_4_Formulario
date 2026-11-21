@@ -163,17 +163,6 @@
       "descripcion": "Una famosa modelo de portada que marca las tendencias de moda juvenil en todo el país. Es extrovertida, directa y muy expresiva.",
       "estado": 1,
       "rol": 2
-    },
-    {
-      "id": "3aSxf99JgzU",
-      "nombre": "Manolo",
-      "talento": "Hace empanadas",
-      "altura_cm": 100,
-      "peso_kg": 111,
-      "cumpleanos": "111111",
-      "descripcion": "AAAAAA",
-      "estado": 0,
-      "rol": 2
     }
   ],
   "estado": [

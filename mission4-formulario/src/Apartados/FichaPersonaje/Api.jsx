@@ -51,15 +51,22 @@ export async function crear(datosNuevoPersonaje) {
   if (!resLista.ok) throw new Error(`Error al obtener lista: ${resLista.status}`);
   const lista = await resLista.json();
 
-  //Sumamos 1 para este nuevo
-  const nuevoId = String(lista.length + 1);
-  //TO-DO: Hacer un reduce que te devuelva el máximo
-
+  // Calculamos el id máximo
+  let idMax = 0;
+  lista.forEach((personaje) => {
+    const numId = Number(personaje.id);
+    if (numId > idMax) {
+      idMax = numId;
+    }
+  });
+  const nuevoId = String(idMax + 1);
+  console.log(nuevoId);
+  
   //Se incluye en la lista
   const r = await fetch(`${API_Personajes}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ id: nuevoId, ...datosNuevoPersonaje }),
+    body: JSON.stringify({ id: String(nuevoId), ...datosNuevoPersonaje }),
   });
 
   if (!r.ok) throw new Error(`Error al crear: ${r.status}`);
